@@ -2,6 +2,8 @@
 
 # Kahu 2018 Cohort Group Project
 
+Heroku Link: https://showmethemonay.herokuapp.com
+
 Meetings are expensive, but sometimes we forget how expensive they are and feel the need to talk for too long about topics that are unimportant for the meeting purpose.
 
 This is an app to display the costs of meetings, and track the costs of your meetings over time.
@@ -53,6 +55,29 @@ As a user:
   | meetings | store the list of meetings the user has attended in the past |
   | users | store the list of users who can attend meetings |
 
+ ## Actions
+
+ ### meetings
+
+ | type | data | purpose |
+ | --- | --- | --- |
+ | RECEIVE_MEETINGS | meetings | retreive meetings from the db and store in redux |
+ | ADD_MEETING | meeting | Add a single meeting to the history after it is created |
+
+ ### users
+ | type | data | purpose |
+ | --- | --- | --- |
+ | RECEIVE_USERS | users | retreive the users from the server |
+
+ ### currentMeeting
+  | type | data | purpose |
+| --- | --- | --- |
+| START_MEETING | attendees ([]), meeting_name | a meeting has started, set initial meeting state |
+| END_MEETING | null | Set meeting in progress flag to false |  
+| TICK_ONE_SECOND | null | Increase running total by 1s worth of $ |
+| RESET_MEETING | null | Revert to initial state |
+
+
 
 ## API (Client - Server)
 
@@ -96,7 +121,7 @@ As a user:
  | meeting_id | Integer |
 
  ---
- 
+
 
 ## Setup
 
