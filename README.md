@@ -58,7 +58,7 @@ As a user:
  ### meetings
  
  | type | data | purpose | 
- | --- | --- | 
+ | --- | --- | --- | 
  | RECEIVE_MEETINGS | meetings | retreive meetings from the db and store in redux | 
  | ADD_MEETING | meeting | Add a single meeting to the history after it is created | 
  
