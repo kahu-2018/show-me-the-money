@@ -9,7 +9,7 @@ var { decode } = require('../auth/token')
 
 // Get	/api/users	Yes	Get the users of the app	An Array of User Objects
 router.get('/', decode, (req, res) => {
-  db.getUsers()
+  db.getUsers(req.app.get('db'))
     .then(users => {
       res.json({users: users})
     })

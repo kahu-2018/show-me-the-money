@@ -8,7 +8,6 @@ const { decode } = require('../auth/token')
 
 // Get / Get a Users Meeting Histroy
 router.get('/', decode, (req, res) => {
-  //req.user.user_name is the current users username, userId needs to be replaced
   db.getUserHistory(req, req.app.get('db'))
     .then(userHistory => {
       res.json({userHistory: userHistory})
@@ -20,7 +19,7 @@ router.get('/', decode, (req, res) => {
 
 // Post	/ Save a completed meeting
 router.post('/', decode, (req, res) => {
-  db.saveMeeting(req.body)
+  db.saveMeeting(req.body, req.app.get('db'))
     .then(id => {
       res.json({id: id})
     })
@@ -31,7 +30,7 @@ router.post('/', decode, (req, res) => {
 
 // Get / Get the attendees of a Meeting	An Array of User objects
 router.get('/:id/users', decode, (req, res) => {
-  db.getAttendees(req.params.id)
+  db.getAttendees(req.params.id, req.app.get('db'))
     .then(attendees => {
       res.json({attendees: attendees})
     })
