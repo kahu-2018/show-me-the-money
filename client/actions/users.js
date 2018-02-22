@@ -8,15 +8,20 @@ function receiveUsers (users) {
   }
 }
 
+function requestUsers (users) {
+  return {
+    type: 'REQUEST_USERS',
+    users
+  }
+}
+
 export function getUsers () {
-  console.log('I am getUsers')
-  return dispatch => {
-    return request('get', 'users' )
-    .then((response) => {
-      console.log('This is the getUsers Request')
+  return function (dispatch) {
+    dispatch(requestUsers())
+    request('get', 'users')
+    .then(res => {
+      dispatch(receiveUsers(res.body))
     })
-    .catch(err => {
-      console.log('ERROR: refer to getUsers in users.js')
-    })
+    .catch(err => console.log(err.message))
   }
 }
