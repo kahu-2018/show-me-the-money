@@ -32,9 +32,15 @@ class CreateMeeting extends React.Component {
     })
   }
 
+  onRemovePerson(i) {
+    this.setState({
+      attendees: this.state.attendees.filter((attendee, idx) => idx !== i)
+    })
+  }
+
   displayAttendees() {
     return this.state.attendees.map((person, i) => {
-        return <li key={i}>{person.name}, {person.wage}</li>
+        return <li key={i}>{person.name}, {person.wage} <button onClick={()=>this.onRemovePerson(i)}>Remove</button></li>
     })
   }
 
