@@ -26,11 +26,11 @@ function getAttendees(meetingId, db) {
   .select('users.*')
 }
 
-function getUserHistory(db) {
-  getUserByName(req.user.user_name, db ).then(user => {
+function getUserHistory(req, db) {
+  return getUserByName(req.user.user_name, db ).then(user => {
     return db('meetings')
     .join('attendees', 'meetings.id', '=', 'attendees.meeting_id')
-    .where('attendees.user_id', userId)
+    .where('attendees.user_id', user.id)
     .select('meetings.*')
 
   })

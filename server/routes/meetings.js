@@ -9,7 +9,7 @@ const { decode } = require('../auth/token')
 // Get / Get a Users Meeting Histroy
 router.get('/', decode, (req, res) => {
   //req.user.user_name is the current users username, userId needs to be replaced
-  db.getUserHistory(userId, req.app.get('db'))
+  db.getUserHistory(req, req.app.get('db'))
     .then(userHistory => {
       res.json({userHistory: userHistory})
     })
