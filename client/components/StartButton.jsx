@@ -4,16 +4,19 @@ import Meeting from './Meeting'
 import {startMeeting, secondTick} from '../actions/currentMeeting'
 import {getAttendees} from '../actions/attendees'
 
-let testData = [{first_name: 'Edi', last_name: 'Rose', wage: '16'}, {first_name: 'Jay', last_name: 'and', wage: '16'}, {first_name: 'Silent', last_name: 'Bob', wage: '18'}]
+let testData = [{first_name: 'Edi', last_name: 'Rose', wage: 16}, {first_name: 'Jay', last_name: 'and', wage: 16}, {first_name: 'Silent', last_name: 'Bob', wage: 18}]
 
 class StartButton extends React.Component {
   constructor(props) {
     super(props)
+    console.log('testing state')
     this.state = {
       showMeeting:false,
-      perSecWages:0
+      perSecWages:2
     }
     this.handleClick = this.handleClick.bind(this)
+    this.setPerSecWages = this.setPerSecWages.bind(this)
+    this.setCostPerSec = this.setCostPerSec.bind(this)
   }
 
 handleClick() {
@@ -34,10 +37,18 @@ getWages(arr){
 setPerSecWages() {
 console.log('heyhey')
  let wages = this.getWages(testData)
- const combinedWages = wages.reduce((a, b) => a + b)
- const perSecondWages = (combinedWages / 60) / 60
-  this.setState({perSecWages: perSecondWages}) 
-  console.log(this.state.perSecWages)
+ var combinedWages = wages.reduce((a, b) => a + b)
+ var perSecondWages = (combinedWages / 60) / 60
+
+ this.setCostPerSec(perSecondWages) 
+ 
+
+}
+
+setCostPerSec(num){
+  console.log('test', num)
+  this.setState({perSecWages:num})
+  
 }
 
 countTime() {
@@ -51,6 +62,7 @@ componentDidMount() {
 }
 
 render () {
+  console.log(this.state.perSecWages)
   return (
   <div className="container">
     <h2 className="title is-2">Start Meeting</h2>
