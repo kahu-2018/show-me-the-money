@@ -15,6 +15,7 @@ router.get('/', decode, (req, res) => {
     .catch(err => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
+    // console.log(res)
 })
 
 // Post	/ Save a completed meeting

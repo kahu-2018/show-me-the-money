@@ -30,7 +30,11 @@ const App = ({auth}) => (
         <Route path="/register" component={Register} />
         <Route path="/meeting" component={StartMeeting} />
         <Route path="/history" component={History} />
+
         <Route path="/history/:id" component={PastMeeting}/>
+
+        <Route path="/profile" component={Profile} />
+
       </div>
 
     </div>

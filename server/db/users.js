@@ -1,5 +1,6 @@
 var hash = require('../auth/hash')
 
+
 function createUser (user_name, first_name, last_name, password, hourly_wage, db) {
   return new Promise ((resolve, reject) => {
     hash.generate(password, (err, hash) => {
@@ -18,9 +19,10 @@ function userExists (user_name, db) {
     .first()
 }
 
-function getUserByName (user_name, db) {
+function getUserByName (req, db) {
+  console.log(req.user.user_name)
   return db('users')
-    .where('user_name', user_name)
+    .where('user_name', req.user.user_name)
     .first()
 }
 
@@ -28,10 +30,20 @@ function getUsers(db) {
   return db('users').select()
 }
 
+function getUserHistory(req, db) {
+  return getUserByName(req, db).then(user => {
+    return db('meetings')
+    .join('attendees', 'meetings.id', '=', 'attendees.meeting_id')
+    .where('attendees.user_id', user.id)
+    .select('meetings.*')
+
+  })
+}
 
 module.exports = {
   createUser,
   userExists,
   getUserByName,
-  getUsers
+  getUsers,
+  getUserHistory
 }
