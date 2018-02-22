@@ -23,11 +23,12 @@ class StartMeeting extends React.Component {
 
   handleClick() {
     this.props.dispatch(getAttendees())
-    this.setPerSecWages()
+    //this.setPerSecWages()
     this.setState({ showMeeting: true, 
                     perSecWages: this.state.perSecWages,
                     showCreateMeeting: false, 
-                    showStartButton: false })
+                    showStartButton: false,
+                    showMeeting: true })
     this.props.dispatch(startMeeting(this.props.attendees, this.props.meetingName, this.state.perSecWages))
     this.setTimer()
   }
@@ -65,10 +66,10 @@ class StartMeeting extends React.Component {
   render() {
     console.log(this.state.perSecWages)
     return (
-      <div className="container">
-        <h2 className="title is-2">Setup Meeting</h2>
+      <div className="container">  
         {this.state.showCreateMeeting && <CreateMeeting />}
         {this.state.showStartButton && <StartButton handleClick = {this.handleClick} />}
+        {this.state.showMeeting && <Meeting />}
       </div>
     )
   }
