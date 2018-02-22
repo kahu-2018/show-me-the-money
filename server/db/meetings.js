@@ -1,30 +1,21 @@
-function saveMeeting(meeting) {
+function saveMeeting(meeting, db) {
   createMeeting(meeting)
-  addAttendeesToMeeting(meeting)
+  .then((ids) => {
+    meetingId= ids[0]
+    return addAttendeesToMeeting(meetingId, meeting)
+  }
 }
 
-function createMeeting(meeting) {
+function createMeeting(meeting, db) {
   return db('meetings')
   .insert({meeting_name, cost, time, attendees: attendeesList.length})
 }
 
-function addAttendeesToMeeting(meeting) {
+function addAttendeesToMeeting(meetingId, attendeesList, db) {
   let userAttendees = attendeesList.filter(person => person.id)
   return db('attendees')
-  .insert({user_id: userAttendees.id, meeting_id:
-  })
-
-  })
+  .insert({user_id: userAttendees.id, meeting_id: meetingId})
 }
-
-
-return db('meetings')
-.insert({meeting_name, cost, time, attendees: attendeesList.length}).into('meetings')
-
-
-.insert(into users table with attendeesArr, ).into('users')
-.insert(then join table with meetingid and userid).into('attendees')
-
 
 meeting: {
   meetingName: '',
@@ -35,7 +26,7 @@ meeting: {
     firstName: '',
     lastName: '',
     hourlyRate: 50.00
-  }]
+  }],
 }
 
 

@@ -11,6 +11,7 @@ function createUser (user_name, first_name, last_name, password, hourly_wage, db
     })
   })
 }
+
 function userExists (user_name, db) {
   return db('users')
     .where('user_name', user_name)
@@ -23,7 +24,7 @@ function getUserByName (user_name, db) {
     .first()
 }
 
-function getUsers() {
+function getUsers(db) {
   return db('users').select()
 }
 
