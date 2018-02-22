@@ -1,11 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import CreateMeeting from './CreateMeeting'
 
 
 function Meeting (props) {
+
   return <div className="container">
-    <CreateMeeting />
+    
+    <div className="MeetingButtons">
+      <button class="button">End Meeting</button>
+      <button class="button">Reset Meeting</button>
+    </div>
   </div>
 }
 

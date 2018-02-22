@@ -5,9 +5,9 @@ import {connect} from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
-import Meeting from './Meeting'
 import History from './History'
-import LoggedInDashboard from './LoggedInDashboard';
+import StartMeeting from './StartMeeting'
+import PastMeeting from './PastMeeting'
 
 const App = ({auth}) => (
   <div>
@@ -23,16 +23,16 @@ const App = ({auth}) => (
           </div>
         </div>
 
-        <div className=''>
-          {!auth.isAuthenticated &&
-            <Route exact path="/" component={Login} />
-          }
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/meeting" component={Meeting} />
-          <Route path="/history" component={History} />
-          <LoggedInDashboard />
-        </div>
+      <div className=''>
+        {!auth.isAuthenticated &&
+          <Route exact path="/" component={Login} />
+        }
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/meeting" component={StartMeeting} />
+        <Route path="/history" component={History} />
+        <Route path="/history/:id" component={PastMeeting}/>
+      </div>
 
       </div>
     </Router>
