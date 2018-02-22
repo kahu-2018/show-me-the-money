@@ -6,62 +6,76 @@ class CreateMeeting extends React.Component {
     super(props)
     this.state = {
       title: '',
-      attendees: []
+      attendees: [],
+      count: 0
     }
-    
-    this.person = { name: '', wage: 0}
+
     this.updateTitle = this.updateTitle.bind(this)
-    this.updateName = this.updateName.bind(this)
-    this.updateWage = this.updateWage.bind(this)
     this.addAttendee = this.addAttendee.bind(this)
+    this.displayAttendees = this.displayAttendees.bind(this)
   }
 
   updateTitle(e) {
-    this.setState({title: e.target.value})
+    this.setState({ title: e.target.value })
   }
 
-  updateName(e) {
-    console.log('name: ', e.target.value)
-    this.person.name = e.target.value
-  }
-
-  updateWage(e) {
-    console.log('wage: ', e.target.value)
-    this.person.wage = e.target.value
-  }
 
   addAttendee(e) {
-    console.log('person: ', this.person)
-    let tmp = [...this.state.attendees].concat(this.person)
-    this.setState({attendees: tmp})
-    console.log('attendees: ', tmp)
+    console.log('formName: ', this.refs.formName.value)
+    let person = {
+      name: this.refs.formName.value,
+      wage: this.refs.formWage.value
+    }
+    this.refs.formName.value = ''
+    this.refs.formWage.value = ''
+    console.log('before this.state.attendees: ', this.state.attendees)
+    console.log('person: ', person)
+    let newAttendees = [...this.state.attendees, person]
+    console.log('newAttendees: ', newAttendees)
+    this.setState({
+      attendees: newAttendees,
+      count: this.state.count++
+    })
     console.log('this.state.attendees: ', this.state.attendees)
-    this.person.name = ''
-    this.person.wage = 0
   }
 
   displayAttendees() {
-    return this.state.attendees.map((person, i) => {
-      <li key={i}>{person.name}, {person.wage}</li>
+    console.log('result: ', results)
+    let samples = [
+      { name: 'happy', wage: '300' },
+      { name: 'hello', wage: '400' }
+    ]
+    let results = samples.map((person, i) => {
+      return <li key={i}>{person.name}, {person.wage}</li>
     })
+    return <ul>{results}</ul>
+    // return this.state.attendees.map((person, i) => {
+    //   return <li key={i}>{person.name}, {person.wage}</li>
+    // })
   }
 
   render() {
     return (
       <div className="container">
         <h2 className="title is-2">Create Meeting</h2>
-        <label for="title">Meeting title:</label>
-        <input id="title" type="text" onChange={this.updateTitle} />
+        <div>
+          <label>Meeting title:</label>
+          <input ref="formTitle" type="text" onChange={this.updateTitle} />
+        </div>
         <br />
-        <ul>
-          { this.displayAttendees }
-        </ul>
-        <h3>Add Attendent</h3>
-        <label for="name">Attendee Name:</label>
-        <input id="name" type="text" onChange={this.updateName} />
-        <label for="wage">Attendee Wage:</label>
-        <input id="wage" type="text" onChange={this.updateWage} />  
-        <button onClick={this.addAttendee}>Add</button>
+        <div>
+          <h4 className="title is-4">Add Attendent</h4>
+          <label>Name:</label>
+          <input ref="formName" type="text" /><br/>
+          <label>Wage:</label>
+          <input ref="formWage" type="text" /><br />
+          <button onClick={this.addAttendee}>Add</button>
+        </div>
+        <br />
+        <div>
+        <h4 className="title is-4">Attendee list</h4>
+        {this.displayAttendees()}
+        </div>
       </div >
     )
   }
