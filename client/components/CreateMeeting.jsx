@@ -68,7 +68,7 @@ class CreateMeeting extends React.Component {
             {this.displayAttendees()}
           </ul>
         </div>
-      </div >
+      </div>
     )
   }
 }
