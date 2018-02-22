@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.timestamp('time')
     table.integer('attendees')
     table.decimal('cost')
+    table.integer('duration')
   })
 };
 
