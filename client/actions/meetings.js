@@ -21,6 +21,13 @@ function addMeeting (meeting) {
   }
 }
 
+function meetingError(meeting) {
+  return {
+    type: 'MEETING_ERROR',
+    meeting
+  }
+}
+
 export function getMeetings () {
   return function (dispatch) {
     dispatch(requestMeetings())
@@ -28,7 +35,7 @@ export function getMeetings () {
     .then(res => {
       dispatch(receiveMeetings(res.body))
     })
-    .catch(err => console.log(err.message))
+    .catch(err => dispatch(meetingError(err.message)))
   }
 }
 
@@ -39,8 +46,8 @@ export function postMeeting () {
     .then(res => {
       console.log(res)
     })
-    .catch(err => console.log(err.message))
-  }
+    .catch(err => dispatch(meetingError(err.message)))
+   }
 }
 
 // export function postMeeting () {
