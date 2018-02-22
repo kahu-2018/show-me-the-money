@@ -15,6 +15,13 @@ function requestUsers (users) {
   }
 }
 
+function usersError(users) {
+  return {
+    type: 'MEETING_ERROR',
+    meeting
+  }
+}
+
 export function getUsers () {
   return function (dispatch) {
     dispatch(requestUsers())
@@ -22,6 +29,6 @@ export function getUsers () {
     .then(res => {
       dispatch(receiveUsers(res.body))
     })
-    .catch(err => console.log(err.message))
+    .catch(err => dispatch(usersError(err.message)))
   }
 }
