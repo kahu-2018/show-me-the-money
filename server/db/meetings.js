@@ -10,7 +10,7 @@ function saveMeeting(meeting, db) {
 
 function createMeeting(meeting, db) {
   return db('meetings')
-  .insert({meeting_name, cost, time, attendees: attendeesList.length})
+  .insert({meeting_name, cost, time, duration, attendees: attendeesList.length})
 }
 
 function addAttendeesToMeeting(meetingId, attendeesList, db) {
