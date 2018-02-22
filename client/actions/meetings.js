@@ -49,16 +49,3 @@ export function postMeeting () {
     .catch(err => dispatch(meetingError(err.message)))
    }
 }
-
-// export function postMeeting () {
-//   console.log('I am the postMeeting function')
-//   return dispatch => {
-//     return request('post', 'meetings')
-//       .then((response) => {
-//         console.log('Added a metting')
-//       })
-//       .catch(err => {
-//         console.log(err)
-//       })
-//   }
-// }
