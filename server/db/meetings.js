@@ -1,21 +1,30 @@
-function saveMeeting(meeting_name, cost, time, attendeesList) {
-  updateMeetingsTable(meeting_name, attendeesCount, cost, time)
-  updateAttendeesTable(attendeesArr, meeting.id)
-  updateUsersTable()
-
-
-
-  return db('meetings')
-  .insert({meeting_name, cost, time, attendees: attendeesList.length}).into('meetings')
-
-
-  .insert(into users table with attendeesArr, ).into('users')
-  .insert(then join table with meetingid and userid).into('attendees')
-
+function saveMeeting(meeting) {
+  createMeeting(meeting)
+  addAttendeesToMeeting(meeting)
 }
 
-function createMeeting()
-function addAttendeeToMeeting()
+function createMeeting(meeting) {
+  return db('meetings')
+  .insert({meeting_name, cost, time, attendees: attendeesList.length})
+}
+
+function addAttendeesToMeeting(meeting) {
+  let userAttendees = attendeesList.filter(person => person.id)
+  return db('attendees')
+  .insert({user_id: userAttendees.id, meeting_id:
+  })
+
+  })
+}
+
+
+return db('meetings')
+.insert({meeting_name, cost, time, attendees: attendeesList.length}).into('meetings')
+
+
+.insert(into users table with attendeesArr, ).into('users')
+.insert(then join table with meetingid and userid).into('attendees')
+
 
 meeting: {
   meetingName: '',
