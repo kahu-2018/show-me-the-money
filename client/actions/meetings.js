@@ -1,13 +1,20 @@
 import request from '../utils/api'
-import { saveUserToken } from '../utils/auth'
 
 function receiveMeetings (meetings) {
+  console.log('This is what I think meetings is')
+  console.log(meetings)
   return {
     type: 'RECEIVE_MEETINGS',
     meetings
   }
 }
 
+function requestMeetings (meetings) {
+  return {
+    type: 'REQUEST_MEETING',
+    meetings
+  }
+}
 
 function addMeeting (meeting) {
   return {
@@ -17,14 +24,13 @@ function addMeeting (meeting) {
 }
 
 export function getMeetings () {
-  return dispatch => {
-    return request('get', 'meetings' )
-    .then((response) => {
-      console.log('This is the getMeetings Request')
+  return function (dispatch) {
+    dispatch(requestMeetings())
+    request('get', 'meetings')
+    .then(res => {
+      dispatch(receiveMeetings(res.body))
     })
-    .catch(err => {
-      console.log('ERROR: refer to getMeetings in meetings.js')
-    })
+    .catch(err => console.log(err.message))
   }
 }
 
