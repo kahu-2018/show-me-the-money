@@ -8,7 +8,7 @@ var { decode } = require('../auth/token')
 
 
 // Get	/api/users	Yes	Get the users of the app	An Array of User Objects
-router.get('/api/users', decode, (req, res) => {
+router.get('/', decode, (req, res) => {
   db.getUsers()
     .then(users => {
       res.json({users: users})
@@ -17,3 +17,5 @@ router.get('/api/users', decode, (req, res) => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
 })
+
+module.exports = router

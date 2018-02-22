@@ -1,15 +1,16 @@
 const express = require('express')
 const app = express()
-var server = require('../server')
+const server = require('../server')
 const db = require('../db/meetings')
 const router = express.Router()
-var { decode } = require('../auth/token')
+const { decode } = require('../auth/token')
 
 
 // Get / Get a Users Meeting Histroy
-router.get('/api/meetings', decode, (req, res) => {
-  db.getUserHistory()
-    .then(userHistory =>
+router.get('/', decode, (req, res) => {
+  //req.user.user_name is the current users username, userId needs to be replaced
+  db.getUserHistory(userId, req.app.get('db'))
+    .then(userHistory => {
       res.json({userHistory: userHistory})
     })
     .catch(err => {
@@ -18,10 +19,10 @@ router.get('/api/meetings', decode, (req, res) => {
 })
 
 // Post	/ Save a completed meeting
-router.post('/api/meetings', decode, (req, res) => {
+router.post('/', decode, (req, res) => {
   db.saveMeeting(req.body)
-    .then(id =>
-      res.json(id: id))
+    .then(id => {
+      res.json({id: id})
     })
     .catch(err => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
@@ -29,12 +30,14 @@ router.post('/api/meetings', decode, (req, res) => {
 })
 
 // Get / Get the attendees of a Meeting	An Array of User objects
-router.get('/api/meetings/:id/users', decode, (req, res) => {
+router.get('/:id/users', decode, (req, res) => {
   db.getAttendees(req.params.id)
-    .then(attendees =>
-      res.json({attendees: attendees}))
+    .then(attendees => {
+      res.json({attendees: attendees})
     })
     .catch(err => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
 })
+
+module.exports = router
