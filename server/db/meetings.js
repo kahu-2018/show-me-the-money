@@ -3,7 +3,7 @@ function saveMeeting(meeting, db) {
   .then((ids) => {
     meetingId= ids[0]
     return addAttendeesToMeeting(meetingId, meeting)
-  }
+  })
 }
 
 function createMeeting(meeting, db) {
