@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import CreateMeeting from './CreateMeeting'
+
 
 function Meeting (props) {
   return <div className="container">
-    <h2 className="title is-2">Start Meeting</h2>
+    <CreateMeeting />
   </div>
 }
 
