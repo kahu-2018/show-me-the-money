@@ -48,7 +48,7 @@ class CreateMeeting extends React.Component {
         </div>
         <br />
         <div>
-          <h4 className="title is-4">Add Attendent</h4>
+          <h4 className="title is-4">Add Attendee</h4>
           <label>Name:</label>
           <input ref="formName" type="text" /><br />
           <label>Wage:</label>
