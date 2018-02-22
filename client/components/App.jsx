@@ -27,7 +27,7 @@ const App = ({auth}) => (
         }
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/meeting" component={StartButton} /> //startbutton is parent of Meeting//
+        <Route path="/meeting" component={StartButton} /> 
         <Route path="/history" component={History} />
       </div>
 

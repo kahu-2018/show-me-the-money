@@ -4,13 +4,15 @@ import { connect } from 'react-redux'
 import Meeting from './Meeting'
 import { startMeeting, secondTick } from '../actions/currentMeeting'
 import { getAttendees } from '../actions/attendees'
+import CreateMeeting from './CreateMeeting'
 
 class StartButton extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       showMeeting: false,
-      perSecWages: 0
+      perSecWages: 0,
+      showCreateMeeting: true
     }
     this.handleClick = this.handleClick.bind(this)
     this.setPerSecWages = this.setPerSecWages.bind(this)
@@ -18,7 +20,11 @@ class StartButton extends React.Component {
   }
 
   handleClick() {
-    this.setState({ showMeeting: true })
+    this.props.dispatch(getAttendees())
+    this.setPerSecWages()
+    this.setState({ showMeeting: true, 
+                    perSecWages: this.state.perSecWages,
+                    showCreateMeeting: false })
     this.props.dispatch(startMeeting(this.props.attendees, this.props.meetingName, this.state.perSecWages))
     this.setTimer()
   }
@@ -40,7 +46,8 @@ class StartButton extends React.Component {
   }
 
   setCostPerSec(num) {
-    this.setState({ perSecWages: num })
+    this.setState({ showMeeting: this.state.showMeeting,
+                    perSecWages: num })
   }
 
   countTime() {
@@ -49,15 +56,15 @@ class StartButton extends React.Component {
 
   componentDidMount() {
     console.log('wahey')
-    this.props.dispatch(getAttendees())
-    this.setPerSecWages()
+    
   }
 
   render() {
     console.log(this.state.perSecWages)
     return (
       <div className="container">
-        <h2 className="title is-2">Start Meeting</h2>
+        <h2 className="title is-2">Setup Meeting</h2>
+        {this.state.showCreateMeeting && <CreateMeeting />}
         <div className="startButton">
           <button class="button" onClick={this.handleClick}>Start Meeting</button>
         </div>
