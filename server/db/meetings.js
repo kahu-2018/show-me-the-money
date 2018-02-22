@@ -23,7 +23,7 @@ function getAttendees(meetingId, db) {
   return db('users')
   .join('attendees', 'users.id', '=', 'attendees.user_id')
   .where('attendees.meeting_id', meetingId)
-  .select('users.*')
+  .select('users.user_name', 'users.first_name', 'users.last_name', 'users.hourly_wage')
 }
 
 function getUserHistory(req, db) {
