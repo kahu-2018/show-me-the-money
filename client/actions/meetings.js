@@ -1,5 +1,4 @@
 import request from '../utils/api'
-import { saveUserToken } from '../utils/auth'
 
 function receiveMeetings (meetings) {
   return {
@@ -8,6 +7,12 @@ function receiveMeetings (meetings) {
   }
 }
 
+function requestMeetings (meetings) {
+  return {
+    type: 'REQUEST_MEETING',
+    meetings
+  }
+}
 
 function addMeeting (meeting) {
   return {
@@ -16,27 +21,31 @@ function addMeeting (meeting) {
   }
 }
 
+function meetingError(meeting) {
+  return {
+    type: 'MEETING_ERROR',
+    meeting
+  }
+}
+
 export function getMeetings () {
-  return dispatch => {
-    return request('get', 'meetings' )
-    .then((response) => {
-      console.log('This is the getMeetings Request')
+  return function (dispatch) {
+    dispatch(requestMeetings())
+    request('get', 'meetings')
+    .then(res => {
+      dispatch(receiveMeetings(res.body))
     })
-    .catch(err => {
-      console.log('ERROR: refer to getMeetings in meetings.js')
-    })
+    .catch(err => dispatch(meetingError(err.message)))
   }
 }
 
 export function postMeeting () {
-  console.log('I am the postMeeting function')
-  return dispatch => {
-    return request('post', 'meetings')
-      .then((response) => {
-        console.log('Added a metting')
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  return function (dispatch) {
+    dispatch(addMeeting())
+    request('post', 'meetings')
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => dispatch(meetingError(err.message)))
+   }
 }
