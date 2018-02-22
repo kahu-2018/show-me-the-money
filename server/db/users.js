@@ -23,8 +23,14 @@ function getUserByName (user_name, db) {
     .first()
 }
 
+function getUsers() {
+  return db('users').select()
+}
+
+
 module.exports = {
   createUser,
   userExists,
-  getUserByName
+  getUserByName,
+  getUsers
 }
