@@ -1,14 +1,15 @@
 const express = require('express')
 const app = express()
-var server = require('../server')
+const server = require('../server')
 const db = require('../db/meetings')
 const router = express.Router()
-var { decode } = require('../auth/token')
+const { decode } = require('../auth/token')
 
 
 // Get / Get a Users Meeting Histroy
 router.get('/', decode, (req, res) => {
-  db.getUserHistory()
+  //req.user.user_name is the current users username, userId needs to be replaced
+  db.getUserHistory(userId, req.app.get('db'))
     .then(userHistory => {
       res.json({userHistory: userHistory})
     })
