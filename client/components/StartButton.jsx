@@ -1,5 +1,5 @@
 import Meeting from './Meeting'
-import startMeeting from '../actions/currentMeeting'
+import {startMeeting, secondTick} from '../actions/currentMeeting'
 
 let arr = [{first_name: 'Edi', last_name: 'Rose', wage: '16'}, {first_name: 'Jay', last_name: 'and', wage: '16'}, {first_name: 'Silent', last_name: 'Bob', wage: '18'}]
 
@@ -14,11 +14,12 @@ class StartButton extends React.Component() {
 
 handleClick() {
   this.setState(showMeeting:true)
-  this.dispatch(startMeeting)
+  this.dispatch(startMeeting())
+  this.setTimer()
 }
 
-increaseTimer() {
- let timer = setInterval(() => countTime (), 1000);
+setTimer() {
+setInterval(() => this.countTime (), 1000);
 }
 
 getWages(stuff){
@@ -26,15 +27,15 @@ getWages(stuff){
   return wages
 }
 
-increaseSpend(getWages) {
+setPerSecWages() {
+ let wages = this.getWages(wage)
  const combinedWages = wages.reduce((a, b) => a + b)
  const perSecondWages = (combinedWages / 60) / 60
  return perSecondWages
 }
 
 countTime() {
- let count = 0
- return count ++
+ dispatch(secondTick())
 }
 
 render () {
@@ -49,5 +50,7 @@ render () {
   </div>
 }
 }
+
+mapStateToProps
 
 export default connect()(StartButton)
