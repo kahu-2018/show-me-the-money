@@ -176,7 +176,6 @@ Your app should be deployed!
 
 ![image](readmeimages/1.jpg)
 ![image](readmeimages/2.jpg)
-![image](readmeimages/3.jpg)
 ![image](readmeimages/4.jpg)
 ![image](readmeimages/5.jpg)
 ![image](readmeimages/6.jpg)
