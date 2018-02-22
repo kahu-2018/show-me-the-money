@@ -6,7 +6,7 @@ import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
 import History from './History'
-import StartButton from './StartButton'
+import StartMeeting from './StartMeeting'
 
 const App = ({auth}) => (
   <Router>
@@ -27,7 +27,7 @@ const App = ({auth}) => (
         }
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/meeting" component={StartButton} /> 
+        <Route path="/meeting" component={StartMeeting} /> 
         <Route path="/history" component={History} />
       </div>
 
