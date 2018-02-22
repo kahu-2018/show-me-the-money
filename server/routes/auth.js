@@ -3,7 +3,7 @@ var router = require('express').Router()
 var {userExists, createUser} = require('../db/users')
 var token = require('../auth/token')
 
-router.post('/', register, token.issue)
+router.post('/register', register, token.issue)
 
 function register (req, res, next) {
   const {user_name, first_name, last_name, password, hourly_wage} = req.body
