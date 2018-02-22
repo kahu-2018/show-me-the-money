@@ -1,3 +1,5 @@
+const {getUserByName} = require('./users')
+
 function saveMeeting(meeting, db) {
   createMeeting(meeting)
   .then((ids) => {
@@ -24,11 +26,14 @@ function getAttendees(meetingId, db) {
   .select('users.*')
 }
 
-function getUserHistory(userId, db) {
-  return db('meetings')
-  .join('attendees', 'meetings.id', '=', 'attendees.meeting_id')
-  .where('attendees.user_id', userId)
-  .select('meetings.*')
+function getUserHistory(db) {
+  getUserByName(req.user.user_name, db ).then(user => {
+    return db('meetings')
+    .join('attendees', 'meetings.id', '=', 'attendees.meeting_id')
+    .where('attendees.user_id', userId)
+    .select('meetings.*')
+
+  })
 }
 
 
