@@ -1,8 +1,6 @@
 import request from '../utils/api'
 
 function receiveMeetings (meetings) {
-  console.log('This is what I think meetings is')
-  console.log(meetings)
   return {
     type: 'RECEIVE_MEETINGS',
     meetings
@@ -35,14 +33,25 @@ export function getMeetings () {
 }
 
 export function postMeeting () {
-  console.log('I am the postMeeting function')
-  return dispatch => {
-    return request('post', 'meetings')
-      .then((response) => {
-        console.log('Added a metting')
-      })
-      .catch(err => {
-        console.log(err)
-      })
+  return function (dispatch) {
+    dispatch(addMeeting())
+    request('post', 'meetings')
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err.message))
   }
 }
+
+// export function postMeeting () {
+//   console.log('I am the postMeeting function')
+//   return dispatch => {
+//     return request('post', 'meetings')
+//       .then((response) => {
+//         console.log('Added a metting')
+//       })
+//       .catch(err => {
+//         console.log(err)
+//       })
+//   }
+// }
