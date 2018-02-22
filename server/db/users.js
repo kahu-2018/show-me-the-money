@@ -20,9 +20,15 @@ function userExists (user_name, db) {
 }
 
 function getUserByName (req, db) {
-  console.log(req.user.user_name)
   return db('users')
     .where('user_name', req.user.user_name)
+    .first()
+}
+
+function getUserById (req, db) {
+  console.log(req.user.id)
+  return db('users')
+    .where('id', req.user.id)
     .first()
 }
 
@@ -45,5 +51,6 @@ module.exports = {
   userExists,
   getUserByName,
   getUsers,
-  getUserHistory
+  getUserHistory,
+  getUserById
 }

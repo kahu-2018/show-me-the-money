@@ -8,6 +8,7 @@ import Nav from './Nav'
 import History from './History'
 import StartMeeting from './StartMeeting'
 import PastMeeting from './PastMeeting'
+import Profile from './Profile'
 
 const App = ({auth}) => (
   <Router>

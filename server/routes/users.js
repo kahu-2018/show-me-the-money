@@ -20,7 +20,6 @@ router.get('/', decode, (req, res) => {
 
 //Get object user from profile page
 router.get('/:id', decode, (req, res) => {
-  console.log(req.params.id)
   db.getUserHistory(req, req.app.get('db'))
     .then(user => {
       res.json({user: user})
@@ -30,5 +29,15 @@ router.get('/:id', decode, (req, res) => {
     })
 })
 
+router.get('/:id', decode, (req, res) => {
+  console.log(req)
+  db.getUserById(req, req.app.get('db'))
+    .then(user => {
+      res.json({user: user})
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
 
 module.exports = router
