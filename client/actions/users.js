@@ -1,5 +1,4 @@
 import request from '../utils/api'
-import { saveUserToken} from '../utils/auth'
 
 function receiveUsers (users) {
   return {
