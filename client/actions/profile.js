@@ -15,4 +15,5 @@ export function getUser (userId) {
     })
     .catch(err => dispatch(usersError(err.message)))
   }
+  console.log(res.body)
 }

@@ -3,16 +3,13 @@ const initialState = {
   targetUser: null
 }
 
-function attendees(state = [], action) {
+function profile( state = [], action) {
     switch (action.type) {
         case 'RECEIVE_USER':
-            return [...state, action.attendee]
-        case 'RECEIVE_USER':
-            return state.filter((attendee, i) => i !== action.index)
-
+            return [...state, action.profile]
         default:
             return state
     }
 }
 
-export default attendees
+export default profile

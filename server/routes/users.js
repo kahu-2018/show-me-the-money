@@ -19,7 +19,7 @@ router.get('/', decode, (req, res) => {
 })
 
 //Get object user from profile page
-router.get('/:id', decode, (req, res) => {
+router.get('/:id/meetings', decode, (req, res) => {
   db.getUserHistory(req, req.app.get('db'))
     .then(user => {
       res.json({user: user})
@@ -29,9 +29,9 @@ router.get('/:id', decode, (req, res) => {
     })
 })
 
+//working on
 router.get('/:id', decode, (req, res) => {
-  console.log(req)
-  db.getUserById(req, req.app.get('db'))
+  db.getUserById(req.params.id, req.app.get('db'))
     .then(user => {
       res.json({user: user})
     })
