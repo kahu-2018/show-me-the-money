@@ -29,7 +29,7 @@ const App = ({auth}) => (
         }
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route exact path="/" component={Dashboard}/>
+        <Route exact path="/dashboard" component={Dashboard}/>
         <Route path="/meeting" component={StartMeeting} />
         <Route path="/history" component={History} />
         <Route path="/history/:id" component={PastMeeting}/>
