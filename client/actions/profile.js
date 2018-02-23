@@ -1,19 +1,19 @@
 import request from '../utils/api'
 
-function receiveUser (user) {
+function receiveUser (targetUser) {
+  console.log('user', targetUser)
   return {
     type: 'RECEIVE_USER',
-    user
+    targetUser
   }
 }
 
-export function getUser (userId) {
+export function getUser(user_name) {
   return function (dispatch) {
-    request('get', 'users', userId)
+    return request('get', 'users/profile', user_name)
     .then(res => {
       dispatch(receiveUser(res.body))
     })
     .catch(err => dispatch(usersError(err.message)))
   }
-  console.log(res.body)
 }

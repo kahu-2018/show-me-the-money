@@ -29,8 +29,8 @@ router.get('/:id/meetings', decode, (req, res) => {
     })
 })
 
-router.get('/:id', decode, (req, res) => {
-  db.getUserById(req.params.id, req.app.get('db'))
+router.get('/profile', decode, (req, res) => {
+  db.getUserByName(req, req.app.get('db'))
     .then(user => {
       res.json({user: user})
     })

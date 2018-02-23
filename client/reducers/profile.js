@@ -6,7 +6,8 @@ const initialState = {
 function profile( state = [], action) {
     switch (action.type) {
         case 'RECEIVE_USER':
-            return [...state, action.profile]
+            return [...state, action.targetUser]
+
         default:
             return state
     }

@@ -6,21 +6,19 @@ class Profile extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // userMeetingInfo: [],
-      // userInfo: []
     }
   }
 
   componentDidMount(){
-    getUser(req.params.id)
+    this.props.dispatch(getUser(this.props.auth.user.user_name))
   }
 
   render(props) {
+    console.log('props', this.props)
     return (
       <div className="container">
         <h2 className="title is-2"></h2>
         <div>
-
         </div>
         <br />
         <div>
@@ -32,4 +30,12 @@ class Profile extends React.Component {
   }
 }
 
-export default connect()(Profile)
+const mapStateToProps = ({auth, targetUser}) => {
+  console.log('target', targetUser)
+  return {
+    auth,
+    targetUser
+  }
+}
+
+export default connect(mapStateToProps)(Profile)
