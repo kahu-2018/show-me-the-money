@@ -13,12 +13,14 @@ function createUser (user_name, first_name, last_name, password, hourly_wage, db
 }
 
 function userExists (user_name, db) {
+  user_name = user_name == undefined? '' : user_name
   return db('users')
     .where('user_name', user_name)
     .first()
 }
 
 function getUserByName (user_name, db) {
+  user_name = user_name == undefined? '' : user_name
   return db('users')
     .where('user_name', user_name)
     .first()
