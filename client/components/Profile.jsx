@@ -12,7 +12,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount(){
-    getUser(userId)
+    getUser(req.params.id)
   }
 
   render(props) {

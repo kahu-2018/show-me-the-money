@@ -36,6 +36,7 @@ const App = ({auth}) => (
 
         <Route path="/profile" component={Profile} />
 
+        <Route path="/profile/:id" component={Profile} />
       </div>
 
     </div>
