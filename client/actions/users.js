@@ -14,10 +14,10 @@ function requestUsers (users) {
   }
 }
 
-function usersError(users) {
+export function usersError(users) {
   return {
     type: 'MEETING_ERROR',
-    meeting
+    users
   }
 }
 

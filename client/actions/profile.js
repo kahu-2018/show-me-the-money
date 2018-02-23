@@ -1,4 +1,5 @@
 import request from '../utils/api'
+import {usersError} from './users'
 
 function receiveUser (targetUser) {
   console.log('user', targetUser)

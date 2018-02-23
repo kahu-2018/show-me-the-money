@@ -14,11 +14,11 @@ class Profile extends React.Component {
   }
 
   render(props) {
-    console.log('props', this.props)
+    console.log('props', this.props.targetUser)
     return (
       <div className="container">
         <h2 className="title is-2"></h2>
-        <div>
+        <div><p>{this.props.targetUser.length > 0 && this.props.targetUser[0].user.first_name}</p>
         </div>
         <br />
         <div>
