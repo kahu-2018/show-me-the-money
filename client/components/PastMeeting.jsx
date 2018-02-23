@@ -8,7 +8,7 @@ function PastMeeting ({meeting}) {
     <div>
       <p>Name: {meeting.meeting_name}</p>
       <p>Time: {meeting.time}</p>
-      <p>Cost: {meeting.cost}</p>
+      <p>Cost: ${meeting.cost}</p>
       <p>Attendees: {meeting.attendees}</p>
     </div>
   </div>

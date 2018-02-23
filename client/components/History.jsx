@@ -18,9 +18,9 @@ class History extends React.Component {
     const meetings = this.props.meetings
     return <div className="container">
       <h2 className="title is-2">Meeting history</h2>
-      <div>{meetings.map((meeting, i) => {
+      {<div>{meetings.map((meeting, i) => {
         return <p key={i}><Link to={`/history/${meeting.id}`}>{meeting.meeting_name}</Link></p>
-      })}</div>
+      })}</div>}
     </div>
   }
 }
