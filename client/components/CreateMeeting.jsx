@@ -21,7 +21,6 @@ class CreateMeeting extends React.Component {
       name: this.refs.formName.value,
       wage: this.refs.formWage.value
     }
-    console.log(person)
     this.refs.formName.value = ''
     this.refs.formWage.value = ''
     this.props.dispatch(addAttendee(person))
@@ -33,8 +32,6 @@ class CreateMeeting extends React.Component {
   }
 
   displayAttendees() {
-    console.log('props: ', this.props)
-    console.log('display', this.props.attendees.attendees)
     return this.props.attendees.attendees.map((person, i) => {
         return <li key={i}>{person.name}, {person.wage} <button onClick={()=>this.onRemovePerson(i)}>Remove</button></li>
     })
@@ -71,7 +68,6 @@ class CreateMeeting extends React.Component {
 
 function mapStateToProps (state){
 
-  console.log(state)
  return {
    title: state.title,
    attendees:state.attendees
