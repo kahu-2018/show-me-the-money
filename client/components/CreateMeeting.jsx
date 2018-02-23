@@ -1,21 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {addAttendee, addTitle, removeAttendee} from '../actions/attendees'
 
 class CreateMeeting extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      title: '',
-      attendees: []
-    }
-
     this.updateTitle = this.updateTitle.bind(this)
     this.addAttendee = this.addAttendee.bind(this)
     this.displayAttendees = this.displayAttendees.bind(this)
   }
 
   updateTitle(e) {
-    this.setState({ title: e.target.value })
+    let title = e.target.value
+    this.props.dispatch(addTitle({title}))
   }
 
 
@@ -24,22 +21,21 @@ class CreateMeeting extends React.Component {
       name: this.refs.formName.value,
       wage: this.refs.formWage.value
     }
+    console.log(person)
     this.refs.formName.value = ''
     this.refs.formWage.value = ''
-    let newAttendees = [...this.state.attendees, person]
-    this.setState({
-      attendees: newAttendees
-    })
-  }
+    this.props.dispatch(addAttendee(person))
+ }
+
 
   onRemovePerson(i) {
-    this.setState({
-      attendees: this.state.attendees.filter((attendee, idx) => idx !== i)
-    })
+    this.props.dispatch(removeAttendee(i))
   }
 
   displayAttendees() {
-    return this.state.attendees.map((person, i) => {
+    console.log('props: ', this.props)
+    console.log('display', this.props.attendees.attendees)
+    return this.props.attendees.attendees.map((person, i) => {
         return <li key={i}>{person.name}, {person.wage} <button onClick={()=>this.onRemovePerson(i)}>Remove</button></li>
     })
   }
@@ -50,7 +46,7 @@ class CreateMeeting extends React.Component {
         <h2 className="title is-2">Create Meeting</h2>
         <div>
           <label>Meeting title:</label>
-          <input ref="formTitle" type="text" onChange={this.updateTitle} />
+          <input ref="formTitle" type="text" onChange={ this.updateTitle} />
         </div>
         <br />
         <div>
@@ -73,4 +69,13 @@ class CreateMeeting extends React.Component {
   }
 }
 
-export default connect()(CreateMeeting)
+function mapStateToProps (state){
+
+  console.log(state)
+ return {
+   title: state.title,
+   attendees:state.attendees
+ }
+}
+
+export default connect(mapStateToProps)(CreateMeeting)

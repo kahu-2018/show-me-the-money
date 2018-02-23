@@ -1,12 +1,21 @@
 
-function addAttendee (attendee) {
+export function addAttendee (attendee) {
+  console.log('action firing')
+  console.log(attendee)
   return {
     type:'ADD_ATTENDEE',
-    attendee
+    attendee:attendee
   }
 }
 
-function removeAttendee (i) {
+export function addTitle (title) {
+  return {
+    type:'ADD_TITLE',
+    title
+  }
+}
+
+export function removeAttendee (i) {
   return {
     type:'REMOVE_ATTENDEE',
     i

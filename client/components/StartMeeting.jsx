@@ -14,7 +14,7 @@ class StartMeeting extends React.Component {
     this.state = {
       showMeeting: false,
       perSecWages: 0,
-      showCreateMeeting: true, 
+      showCreateMeeting: true,
       showStartButton: true
     }
     this.handleClick = this.handleClick.bind(this)
@@ -26,11 +26,11 @@ class StartMeeting extends React.Component {
   handleClick() {
     this.props.dispatch(getAttendees())
     this.setPerSecWages()
-    this.setState({ showMeeting: true, 
+    this.setState({ showMeeting: true,
                     perSecWages: this.state.perSecWages,
-                    showCreateMeeting: false, 
+                    showCreateMeeting: false,
                     showStartButton: false,
-                    showMeeting: true })
+                  })
     this.props.dispatch(startMeeting(this.props.attendees, this.props.meetingName, this.state.perSecWages))
     this.setTimer()
   }
@@ -60,30 +60,30 @@ class StartMeeting extends React.Component {
   countTime() {
     this.props.dispatch(secondTick())
   }
-  
+
   handleEndMeetingButton(){
     this.props.dispatch(resetMeeting())
     this.setState({
       showMeeting: false,
       perSecWages: this.state.perSecWages,
-      showCreateMeeting: false, 
-      showStartButton: false 
+      showCreateMeeting: false,
+      showStartButton: false
     })
   }
 
   componentDidMount() {
     console.log('wahey')
-    
+
   }
 
   render() {
     console.log(this.state.perSecWages)
     return (
-      <div className="container">  
+      <div className="container">
         {this.state.showCreateMeeting && <CreateMeeting />}
         {this.state.showStartButton && <StartButton handleClick = {this.handleClick} />}
         {this.state.showMeeting && <Meeting />}
-        
+
       </div>
     )
   }
