@@ -1,16 +1,22 @@
 const {getUserByName} = require('./users')
 
 function saveMeeting(meeting, db) {
-  createMeeting(meeting)
-  .then((ids) => {
-    meetingId= ids[0]
-    return addAttendeesToMeeting(meetingId, meeting)
-  })
+  return createMeeting(meeting, db)
+  // .then((ids) => {
+  //   console.log('ids: ', ids)
+  //   meetingId= ids[0]
+  //   // TODO: pass in attendeeList instead of empty array when all meeting attendees are login users
+  //   return addAttendeesToMeeting(meetingId, [], db)
+  // })
 }
 
 function createMeeting(meeting, db) {
   return db('meetings')
-  .insert({meeting_name, cost, time, duration, attendees: attendeesList.length})
+  .insert({meeting_name: meeting.meeting_name,
+           cost: meeting.cost,
+           time: meeting.time,
+           duration: meeting.duration,
+           attendees: meeting.attendeesList.length})
 }
 
 function addAttendeesToMeeting(meetingId, attendeesList, db) {
