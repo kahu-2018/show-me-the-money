@@ -8,6 +8,7 @@ import Nav from './Nav'
 import History from './History'
 import StartMeeting from './StartMeeting'
 import PastMeeting from './PastMeeting'
+import Dashboard from './Dashboard'
 
 const App = ({auth}) => (
   <Router>
@@ -28,6 +29,7 @@ const App = ({auth}) => (
         }
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route exact path="/" component={Dashboard}/>
         <Route path="/meeting" component={StartMeeting} />
         <Route path="/history" component={History} />
         <Route path="/history/:id" component={PastMeeting}/>
