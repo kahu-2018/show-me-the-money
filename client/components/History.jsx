@@ -16,7 +16,6 @@ class History extends React.Component {
   }
   render() {
     const meetings = this.props.meetings
-    console.log(meetings)
     return <div className="container">
       <h2 className="title is-2">Meeting history</h2>
       {<div>{meetings.map((meeting, i) => {
@@ -27,7 +26,6 @@ class History extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {meetings: state.meetings}
 }
 
