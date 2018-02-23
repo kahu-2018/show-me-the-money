@@ -29,7 +29,6 @@ router.get('/:id/meetings', decode, (req, res) => {
     })
 })
 
-//working on
 router.get('/:id', decode, (req, res) => {
   db.getUserById(req.params.id, req.app.get('db'))
     .then(user => {

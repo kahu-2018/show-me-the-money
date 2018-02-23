@@ -25,13 +25,11 @@ function getUserByName (req, db) {
     .first()
 }
 
-//working on
 function getUserById (userId, db) {
   return db('users')
     .where('id', userId)
     .first()
 }
-//
 
 function getUsers(db) {
   return db('users').select()

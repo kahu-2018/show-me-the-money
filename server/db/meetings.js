@@ -16,13 +16,7 @@ function createMeeting(meeting, db) {
 function addAttendeesToMeeting(meetingId, attendeesList, db) {
   let userAttendees = attendeesList.filter(person => person.id)
   return db('attendees')
-  .insert({user_id: userAttendees.id, meeting_id:
-  })
-
-  return db('meetings')
-  .insert({meeting_name, cost, time, attendees: attendeesList.length}).into('meetings')
-  .insert(into users table with attendeesArr, ).into('users')
-  .insert(then join table with meetingid and userid).into('attendees')
+  .insert({user_id: userAttendees.id, meeting_id: meetingId})
 }
 
 function getAttendees(meetingId, db) {
