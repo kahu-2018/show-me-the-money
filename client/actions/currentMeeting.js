@@ -7,7 +7,7 @@ function startMeeting (attendees, meeting_name) {
   }
 }
 
-function endMeeting () {
+export function endMeeting () {
   return {
     type: 'END_MEETING',
   }

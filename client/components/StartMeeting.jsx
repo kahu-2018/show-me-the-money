@@ -6,6 +6,7 @@ import { startMeeting, secondTick } from '../actions/currentMeeting'
 import { getAttendees } from '../actions/attendees'
 import CreateMeeting from './CreateMeeting'
 import StartButton from './StartButton'
+//let newState = {...state}
 
 class StartMeeting extends React.Component {
   constructor(props) {
@@ -19,11 +20,12 @@ class StartMeeting extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.setPerSecWages = this.setPerSecWages.bind(this)
     this.setCostPerSec = this.setCostPerSec.bind(this)
+    this.handleEndMeetingButton = this.handleEndMeetingButton.bind(this)
   }
 
   handleClick() {
     this.props.dispatch(getAttendees())
-    //this.setPerSecWages()
+    this.setPerSecWages()
     this.setState({ showMeeting: true, 
                     perSecWages: this.state.perSecWages,
                     showCreateMeeting: false, 
@@ -43,6 +45,7 @@ class StartMeeting extends React.Component {
   }
 
   setPerSecWages() {
+
     let wages = this.getWages(this.props.attendees)
     var combinedWages = wages.reduce((a, b) => a + b)
     var perSecondWages = (combinedWages / 60) / 60
@@ -57,6 +60,16 @@ class StartMeeting extends React.Component {
   countTime() {
     this.props.dispatch(secondTick())
   }
+  
+  handleEndMeetingButton(){
+    this.props.dispatch(resetMeeting())
+    this.setState({
+      showMeeting: false,
+      perSecWages: this.state.perSecWages,
+      showCreateMeeting: false, 
+      showStartButton: false 
+    })
+  }
 
   componentDidMount() {
     console.log('wahey')
@@ -70,6 +83,7 @@ class StartMeeting extends React.Component {
         {this.state.showCreateMeeting && <CreateMeeting />}
         {this.state.showStartButton && <StartButton handleClick = {this.handleClick} />}
         {this.state.showMeeting && <Meeting />}
+        
       </div>
     )
   }
