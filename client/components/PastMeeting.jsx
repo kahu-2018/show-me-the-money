@@ -3,12 +3,13 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 function PastMeeting ({meeting}) {
+  console.log(meeting)
   return <div>
     <h2>Past Meeting</h2>
     <div>
       <p>Name: {meeting.meeting_name}</p>
       <p>Time: {meeting.time}</p>
-      <p>Cost: {meeting.cost}</p>
+      <p>Cost: ${meeting.cost}</p>
       <p>Attendees: {meeting.attendees}</p>
     </div>
   </div>
