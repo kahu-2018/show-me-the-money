@@ -8,7 +8,7 @@ function startMeeting (attendees, meetingName, wages) {
   }
 }
 
-function endMeeting () {
+export function endMeeting () {
   return {
     type: 'END_MEETING'
   }
