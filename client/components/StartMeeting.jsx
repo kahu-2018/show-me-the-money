@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 import React from 'react'
 import {connect} from 'react-redux'
 import Meeting from './Meeting'
 import {launchMeeting, secondTick} from '../actions/currentMeeting'
 import {getAttendees} from '../actions/attendees'
+=======
+
+import React from 'react'
+import { connect } from 'react-redux'
+import Meeting from './Meeting'
+import { startMeeting, secondTick } from '../actions/currentMeeting'
+import { getAttendees } from '../actions/attendees'
+>>>>>>> cd58346f2d2ac4e09519c9b3dc1d31b96e9dedb2
 import CreateMeeting from './CreateMeeting'
 import StartButton from './StartButton'
 //let newState = {...state}
@@ -25,8 +34,12 @@ class StartMeeting extends React.Component {
   handleClick() {
     this.props.dispatch(getAttendees())
     this.setPerSecWages()
-    this.setState({showMeeting: true, perSecWages: this.state.perSecWages, showCreateMeeting: false, showStartButton: false})
-    this.props.dispatch(launchMeeting(this.props.attendees, this.props.title, this.state.perSecWages))
+    this.setState({ showMeeting: true,
+                    perSecWages: this.state.perSecWages,
+                    showCreateMeeting: false,
+                    showStartButton: false,
+                    showMeeting: true })
+    this.props.dispatch(startMeeting(this.props.attendees, this.props.meetingName, this.state.perSecWages))
     this.setTimer()
   }
 
@@ -41,7 +54,7 @@ class StartMeeting extends React.Component {
   }
 
   setPerSecWages() {
-    console.log('props: ', this.props)
+
     let wages = this.getWages(this.props.attendees)
     var combinedWages = wages.reduce((a, b) => a + b)
     var perSecondWages = (combinedWages / 60) / 60
@@ -49,7 +62,8 @@ class StartMeeting extends React.Component {
   }
 
   setCostPerSec(num) {
-    this.setState({showMeeting: this.state.showMeeting, perSecWages: num})
+    this.setState({ showMeeting: this.state.showMeeting,
+                    perSecWages: num })
   }
 
   countTime() {
