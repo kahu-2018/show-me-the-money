@@ -1,9 +1,8 @@
-
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import Meeting from './Meeting'
-import { startMeeting, secondTick } from '../actions/currentMeeting'
-import { getAttendees } from '../actions/attendees'
+import {launchMeeting, secondTick} from '../actions/currentMeeting'
+import {getAttendees} from '../actions/attendees'
 import CreateMeeting from './CreateMeeting'
 import StartButton from './StartButton'
 //let newState = {...state}
@@ -26,12 +25,8 @@ class StartMeeting extends React.Component {
   handleClick() {
     this.props.dispatch(getAttendees())
     this.setPerSecWages()
-    this.setState({ showMeeting: true,
-                    perSecWages: this.state.perSecWages,
-                    showCreateMeeting: false,
-                    showStartButton: false,
-                  })
-    this.props.dispatch(startMeeting(this.props.attendees, this.props.meetingName, this.state.perSecWages))
+    this.setState({showMeeting: true, perSecWages: this.state.perSecWages, showCreateMeeting: false, showStartButton: false})
+    this.props.dispatch(launchMeeting(this.props.attendees, this.props.title, this.state.perSecWages))
     this.setTimer()
   }
 
@@ -40,12 +35,13 @@ class StartMeeting extends React.Component {
   }
 
   getWages(arr) {
-    let wages = arr.map(cell => cell.wage)
+    console.log('getwages: ', arr)
+    let wages = arr.attendees.map(cell => cell.wage)
     return wages
   }
 
   setPerSecWages() {
-
+    console.log('props: ', this.props)
     let wages = this.getWages(this.props.attendees)
     var combinedWages = wages.reduce((a, b) => a + b)
     var perSecondWages = (combinedWages / 60) / 60
@@ -53,36 +49,24 @@ class StartMeeting extends React.Component {
   }
 
   setCostPerSec(num) {
-    this.setState({ showMeeting: this.state.showMeeting,
-                    perSecWages: num })
+    this.setState({showMeeting: this.state.showMeeting, perSecWages: num})
   }
 
   countTime() {
     this.props.dispatch(secondTick())
   }
 
-  handleEndMeetingButton(){
+  handleEndMeetingButton() {
     this.props.dispatch(resetMeeting())
-    this.setState({
-      showMeeting: false,
-      perSecWages: this.state.perSecWages,
-      showCreateMeeting: false,
-      showStartButton: false
-    })
-  }
-
-  componentDidMount() {
-    console.log('wahey')
-
+    this.setState({showMeeting: false, perSecWages: this.state.perSecWages, showCreateMeeting: false, showStartButton: false})
   }
 
   render() {
-    console.log(this.state.perSecWages)
     return (
       <div className="container">
-        {this.state.showCreateMeeting && <CreateMeeting />}
-        {this.state.showStartButton && <StartButton handleClick = {this.handleClick} />}
-        {this.state.showMeeting && <Meeting />}
+        {this.state.showCreateMeeting && <CreateMeeting/>}
+        {this.state.showStartButton && <StartButton handleClick={this.handleClick}/>}
+        {this.state.showMeeting && <Meeting/>}
 
       </div>
     )
@@ -90,10 +74,7 @@ class StartMeeting extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    attendees: state.attendees,
-    meetingName: meetingName
-  }
+  return {attendees: state.attendees, title: state.title}
 }
 
-export default connect()(StartMeeting)
+export default connect(mapStateToProps)(StartMeeting)

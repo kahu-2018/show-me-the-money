@@ -1,9 +1,9 @@
 
-function startMeeting (attendees, meetingName, wages) {
+export function launchMeeting (attendees, title, wages) {
   return {
     type: 'START_MEETING',
     attendees,
-    meetingName,
+    title,
     wages
   }
 }
@@ -14,13 +14,13 @@ export function endMeeting () {
   }
 }
 
-function secondTick () {
+export function secondTick () {
   return {
     type: 'TICK_ONE_SECOND'
   }
 }
 
-function resetMeeting () {
+export function resetMeeting () {
   return {
     type: 'RESET_MEETING'
   }
