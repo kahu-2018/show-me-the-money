@@ -7,7 +7,7 @@ const initialState = {
   timer:0
 }
 
-function currentMeeting(state=initialState, action) {
+export default function currentMeeting(state=initialState, action) {
   let newState = {...state}
   switch (action.type) {
     case 'START_MEETING':
@@ -17,14 +17,15 @@ function currentMeeting(state=initialState, action) {
       newState.meetingRunning = true
       return newState
     case 'END_MEETING':
-      return newState  
+      newState.meetingRunning = false
+      return newState
     case 'TICK_ONE_SECOND':
       newState.totalSpend += newState.wages
       newState.timer ++
-      return newState   
+      return newState
     case 'RESET_MEETING':
       return newState=initialState
     default:
       return state
   }
-} 
+}
