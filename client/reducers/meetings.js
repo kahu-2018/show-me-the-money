@@ -1,7 +1,7 @@
 function meetings(state = [], action) {
   switch (action.type) {
     case 'RECEIVE_MEETINGS':
-      return [...action.meetings]
+      return [...state, action.meetings]
     default:
     return state
   }
